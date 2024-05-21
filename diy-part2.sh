@@ -28,3 +28,4 @@ rm -rf feeds/kenzo/luci-app-argon-config
 git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git feeds/luci/themes/luci-theme-argon
 git clone -b 18.06 https://github.com/jerrykuku/luci-app-argon-config.git feeds/luci/applications/luci-app-argon-config
 wget https://raw.githubusercontent.com/1345695/Actions-OpenWrt/main/background/1080.mp4 -P feeds/luci/themes/luci-theme-argon/htdocs/luci-static/argon/background
+./scripts/feeds install -a
