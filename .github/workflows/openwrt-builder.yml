@@ -62,23 +62,33 @@ jobs:
     - name: Load custom feeds
       run: |
         [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
-        chmod +x $DIY_P1_SH
         cd openwrt
-        $GITHUB_WORKSPACE/$DIY_P1_SH
+        sed -i '1i src-git kenzo https://github.com/kenzok8/openwrt-packages' feeds.conf.default
+
 
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
 
     - name: Install feeds
-      run: cd openwrt && ./scripts/feeds install -a
+      run: |
+        cd openwrt 
+        sed -i 's/192.168.1.1/192.168.50.1/g' package/base-files/files/bin/config_generate
+        sed -i 's/$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF.:0:0:99999:7:::/$1$eK1Ot.KS$t3PuFw0Az1qM6Plz2Ki9P0:19541:0:99999:7:::/g' package/lean/default-settings/files/zzz-default-settings
+        sed -i 's/KERNEL_PATCHVER:=6.1/KERNEL_PATCHVER:=6.6/g' target/linux/x86/Makefile
+        sudo rm -rf feeds/luci/themes/luci-theme-argon-mod
+        sudo rm -rf feeds/luci/themes/luci-theme-argon
+        sudo rm -rf feeds/luci/applications/luci-app-argon-config
+        sudo rm -rf feeds/kenzo/luci-theme-argon
+        sudo rm -rf feeds/kenzo/luci-app-argon-config
+        sudo git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git feeds/luci/themes/luci-theme-argon
+        sudo git clone -b 18.06 https://github.com/jerrykuku/luci-app-argon-config.git feeds/luci/applications/luci-app-argon-config
+        sudo wget https://raw.githubusercontent.com/1345695/Actions-OpenWrt/main/background/1080.mp4 -P feeds/luci/themes/luci-theme-argon/htdocs/luci-static/argon/background
+        ./scripts/feeds install -a
 
     - name: Load custom configuration
       run: |
         [ -e files ] && mv files openwrt/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
-        chmod +x $DIY_P2_SH
-        cd openwrt
-        $GITHUB_WORKSPACE/$DIY_P2_SH
 
     - name: Download package
       id: package
