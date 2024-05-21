@@ -83,7 +83,10 @@ jobs:
         sudo rm -rf /feeds/kenzo/luci-theme-argon
         sudo rm -rf /feeds/kenzo/luci-app-argon-config
         ./scripts/feeds install -a -f
-
+        ls /feeds/kenzo/
+        ls /feeds/luci/themes/
+        ls /feeds/luci//applications/
+        ls /package/lean/
     - name: Load custom configuration
       run: |
         [ -e files ] && mv files openwrt/files
