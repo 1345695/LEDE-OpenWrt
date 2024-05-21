@@ -80,10 +80,11 @@ jobs:
         sudo rm -rf /feeds/luci/applications/luci-app-argon-config
         sudo rm -rf /feeds/kenzo/luci-theme-argon
         sudo rm -rf /feeds/kenzo/luci-app-argon-config
-        sudo git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git /feeds/luci/themes/luci-theme-argon
-        sudo git clone -b 18.06 https://github.com/jerrykuku/luci-app-argon-config.git /feeds/luci/applications/luci-app-argon-config
-        sudo wget https://raw.githubusercontent.com/1345695/Actions-OpenWrt/main/background/1080.mp4 -P /feeds/luci/themes/luci-theme-argon/htdocs/luci-static/argon/background
-        ./scripts/feeds install -a
+        sudo git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git /package/lean/luci-theme-argon
+        sudo git clone -b 18.06 https://github.com/jerrykuku/luci-app-argon-config.git /package/lean/luci-app-argon-config
+        sudo wget https://raw.githubusercontent.com/1345695/Actions-OpenWrt/main/background/1080.mp4 -P /package/lean/luci-theme-argon/htdocs/luci-static/argon/background
+        ./scripts/feeds update -a
+        ./scripts/feeds install -a -f
 
     - name: Load custom configuration
       run: |
