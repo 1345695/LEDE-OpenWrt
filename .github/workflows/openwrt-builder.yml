@@ -56,13 +56,13 @@ jobs:
       working-directory: /workdir
       run: |
         df -hT $PWD
-        git clone https://github.com/kenzok8/openwrt-packages pack
         git clone $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
 
     - name: Load custom feeds
       run: |
         [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
+        sudo git clone https://github.com/kenzok8/openwrt-packages pack
         sudo cp -r pack/luci-app-adguardhome/ openwrt/package/lean/luci-app-adguardhome
         sudo cp -r pack/luci-app-openclash/ openwrt/package/lean/luci-app-openclash
         cd openwrt
