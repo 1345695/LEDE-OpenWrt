@@ -67,7 +67,7 @@ jobs:
         ./scripts/feeds install -a -f
         cd ..
         sudo git clone https://github.com/kenzok8/openwrt-packages pack
-        sudo git clone -b v5 https://github.com/sbwml/luci-app-mosdns mosdns
+        sudo git clone -b v5-lua https://github.com/sbwml/luci-app-mosdns mosdns
         sudo git clone -b dev --single-branch --filter=blob:none https://github.com/vernesong/OpenClash OpenClash
         sudo cp -r pack/luci-app-adguardhome/ openwrt/package/lean/luci-app-adguardhome
         sudo cp -r OpenClash/luci-app-openclash/ openwrt/package/lean/luci-app-openclash
