@@ -68,9 +68,10 @@ jobs:
         cd ..
         sudo git clone https://github.com/kenzok8/openwrt-packages pack
         sudo git clone -b v5-lua https://github.com/sbwml/luci-app-mosdns mosdns
-        sudo git clone -b dev --single-branch --filter=blob:none https://github.com/vernesong/OpenClash OpenClash
+#        sudo git clone -b master --single-branch --filter=blob:none https://github.com/vernesong/OpenClash OpenClash
         sudo cp -r pack/luci-app-adguardhome/ openwrt/package/lean/luci-app-adguardhome
-        sudo cp -r OpenClash/luci-app-openclash/ openwrt/package/lean/luci-app-openclash
+        sudo cp -r pack/luci-app-openclash/ openwrt/package/lean/luci-app-openclash
+#        sudo cp -r OpenClash/luci-app-openclash/ openwrt/package/lean/luci-app-openclash
         sudo cp -r mosdns/luci-app-mosdns/ openwrt/package/lean/luci-app-mosdns
         sudo cp -r mosdns/mosdns/ openwrt/package/lean/mosdns
         sudo cp -r mosdns/v2dat/ openwrt/package/lean/v2dat
