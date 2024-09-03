@@ -67,15 +67,16 @@ jobs:
         ./scripts/feeds install -a -f
         cd ..
         sudo git clone https://github.com/kenzok8/openwrt-packages pack
-        sudo git clone -b v5-lua https://github.com/sbwml/luci-app-mosdns mosdns
+        sudo git clone -b v5-lua https://github.com/sbwml/luci-app-mosdns mosdns-lua
+        sudo git clone -b v5 https://github.com/sbwml/luci-app-mosdns mosdns-v5
         sudo cp -r pack/luci-app-adguardhome/ openwrt/package/lean/luci-app-adguardhome
         sudo cp -r pack/luci-app-openclash/ openwrt/package/lean/luci-app-openclash
         sudo git clone -b dev --single-branch --filter=blob:none https://github.com/vernesong/OpenClash OpenClash
         sudo cp -r pack/luci-app-adguardhome/ openwrt/package/lean/luci-app-adguardhome
         sudo cp -r OpenClash/luci-app-openclash/ openwrt/package/lean/luci-app-openclash
-        sudo cp -r mosdns/luci-app-mosdns/ openwrt/package/lean/luci-app-mosdns
-        sudo cp -r mosdns/mosdns/ openwrt/package/lean/mosdns
-        sudo cp -r mosdns/v2dat/ openwrt/package/lean/v2dat
+        sudo cp -r mosdns-lua/luci-app-mosdns/ openwrt/package/lean/luci-app-mosdns
+        sudo cp -r mosdns-v5/mosdns/ openwrt/package/lean/mosdns
+        sudo cp -r mosdns-v5/v2dat/ openwrt/package/lean/v2dat
         cd openwrt
         sed -i 's/192.168.1.1/192.168.50.1/g' package/base-files/files/bin/config_generate
         sed -i 's/$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF.:0:0:99999:7:::/$1$eK1Ot.KS$t3PuFw0Az1qM6Plz2Ki9P0:19541:0:99999:7:::/g' package/lean/default-settings/files/zzz-default-settings
