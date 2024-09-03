@@ -70,9 +70,7 @@ jobs:
         sudo git clone -b v5-lua https://github.com/sbwml/luci-app-mosdns mosdns-lua
         sudo git clone -b v5 https://github.com/sbwml/luci-app-mosdns mosdns-v5
         sudo cp -r pack/luci-app-adguardhome/ openwrt/package/lean/luci-app-adguardhome
-        sudo git clone -b dev --single-branch --filter=blob:none https://github.com/vernesong/OpenClash OpenClash
-        sudo cp -r pack/luci-app-adguardhome/ openwrt/package/lean/luci-app-adguardhome
-        sudo cp -r OpenClash/luci-app-openclash/ openwrt/package/lean/luci-app-openclash
+        sudo cp -r pack/luci-app-openclash/ openwrt/package/lean/luci-app-openclash
         sudo cp -r mosdns-lua/luci-app-mosdns/ openwrt/package/lean/luci-app-mosdns
         sudo cp -r mosdns-v5/mosdns/ openwrt/package/lean/mosdns
         sudo cp -r mosdns-v5/v2dat/ openwrt/package/lean/v2dat
