@@ -65,9 +65,26 @@ jobs:
         cd openwrt
         ./scripts/feeds update -a
         ./scripts/feeds install -a -f
-        sudo rm -rf feeds/packages/net/smartdns
-        sudo rm -rf feeds/luci/themes/luci-theme-argon-mod
-        sudo rm -rf feeds/luci/themes/luci-theme-argon
+        cd ..
+        sudo rm -rf openwrt/feeds/packages/net/v2ray-geodata
+        sudo rm -rf openwrt/feeds/packages/net/mosdns
+        sudo rm -rf openwrt/feeds/packages/net/smartdns
+        sudo rm -rf openwrt/feeds/packages/net/v2dat
+        sudo rm -rf openwrt/feeds/luci/themes/luci-theme-argon-mod
+        sudo rm -rf openwrt/feeds/luci/themes/luci-theme-argon
+        sudo rm -rf openwrt/feeds/luci/applications/luci-app-argon-config
+        sudo rm -rf openwrt/feeds/luci/applications/luci-app-smartdns
+        sudo rm -rf openwrt/feeds/luci/applications/luci-app-mosdns
+        sudo rm -rf openwrt/feeds/luci/applications/luci-app-openclash
+        sudo git clone https://github.com/kenzok8/openwrt-packages pack
+        sudo git clone -b v5 https://github.com/sbwml/luci-app-mosdns mosdns
+        sudo cp -r pack/luci-app-adguardhome/ openwrt/feeds/luci/applications/luci-app-adguardhome
+        sudo cp -r mosdns/luci-app-mosdns/ openwrt/feeds/luci/applications/luci-app-mosdns
+        sudo cp -r mosdns/mosdns/ openwrt/feeds/packages/net/mosdns
+        sudo cp -r mosdns/v2dat/ openwrt/feeds/packages/net/v2dat
+        sudo git clone -b dev --single-branch --filter=blob:none https://github.com/vernesong/OpenClash OpenClash
+        sudo cp -r OpenClash/luci-app-openclash/ openwrt/feeds/luci/applications/luci-app-openclash
+        cd openwrt
         sed -i 's/CONFIG_CPU_FREQ_DEFAULT_GOV_SCHEDUTIL/CONFIG_CPU_FREQ_DEFAULT_GOV_PERFORMANCE/g' target/linux/x86/64/config-5.15
         sed -i '/CONFIG_CPU_FREQ_GOV_SCHEDUTIL/a\CONFIG_CPU_FREQ_GOV_PERFORMANCE=y' target/linux/x86/64/config-5.15
         sed -i 's/CONFIG_CPU_FREQ_DEFAULT_GOV_SCHEDUTIL/CONFIG_CPU_FREQ_DEFAULT_GOV_PERFORMANCE/g' target/linux/x86/64/config-6.6
@@ -76,13 +93,16 @@ jobs:
         sed -i '/CONFIG_CPU_FREQ_GOV_SCHEDUTIL/a\CONFIG_CPU_FREQ_GOV_PERFORMANCE=y' target/linux/x86/64/config-6.1
         sed -i "s/set network.globals.ula_prefix='auto'//g" package/base-files/files/bin/config_generate
         sed -i 's/192.168.1.1/192.168.50.1/g' package/base-files/files/bin/config_generate
+        sed -i 's/192.168.1.1/192.168.50.1/g' package/base-files/Makefile
         sed -i 's/$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF.:0:0:99999:7:::/$1$eK1Ot.KS$t3PuFw0Az1qM6Plz2Ki9P0:19541:0:99999:7:::/g' package/lean/default-settings/files/zzz-default-settings
         sed -i 's/KERNEL_PATCHVER:=6.1/KERNEL_PATCHVER:=6.6/g' target/linux/x86/Makefile
         sed -i '/customized in this file/a net.netfilter.nf_conntrack_max=655350' package/base-files/files/etc/sysctl.conf
-        sudo git clone https://github.com/1345695/openwrt-smartdns.git package/lean/smartdns
-        sudo git clone https://github.com/jerrykuku/luci-theme-argon.git package/lean/luci-theme-argon
-        sudo git clone https://github.com/jerrykuku/luci-app-argon-config.git package/lean/luci-app-argon-config
-        sudo wget https://raw.githubusercontent.com/1345695/Actions-OpenWrt/main/background/1080.mp4 -P package/lean/luci-theme-argon/htdocs/luci-static/argon/background
+        sudo git clone https://github.com/sbwml/v2ray-geodata.git feeds/packages/net/v2ray-geodata
+        sudo git clone https://github.com/1345695/openwrt-smartdns.git feeds/packages/net/smartdns
+        sudo git clone https://github.com/pymumu/luci-app-smartdns.git feeds/luci/applications/luci-app-smartdns
+        sudo git clone https://github.com/jerrykuku/luci-theme-argon.git feeds/luci/themes/luci-theme-argon
+        sudo git clone https://github.com/jerrykuku/luci-app-argon-config.git feeds/luci/applications/luci-app-argon-config
+        sudo wget https://raw.githubusercontent.com/1345695/Actions-OpenWrt/main/background/1080.mp4 -P feeds/luci/themes/luci-theme-argon/htdocs/luci-static/argon/background
         ./scripts/feeds update -a
         ./scripts/feeds install -a -f
     - name: Load custom configuration
