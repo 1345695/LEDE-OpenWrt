@@ -79,6 +79,8 @@ jobs:
         sudo git clone https://github.com/kenzok8/openwrt-packages pack
         sudo git clone -b v5 https://github.com/sbwml/luci-app-mosdns mosdns
         sudo cp -r pack/luci-app-adguardhome/ openwrt/feeds/luci/applications/luci-app-adguardhome
+        sudo sed -i "s/https:\/\/github.com\/Loyalsoldier\/v2ray-rules-dat\/releases\/latest\/download/http:\/\/10.0.0.10\/meta\/geo/g" mosdns/luci-app-mosdns/root/usr/share/mosdns/mosdns.sh
+        sudo sed -i "s/https:\/\/github.com\/Loyalsoldier\/geoip\/releases\/latest\/download/http:\/\/10.0.0.10\/meta\/geo/g" mosdns/luci-app-mosdns/root/usr/share/mosdns/mosdns.sh
         sudo cp -r mosdns/luci-app-mosdns/ openwrt/feeds/luci/applications/luci-app-mosdns
         sudo cp -r mosdns/mosdns/ openwrt/feeds/packages/net/mosdns
         sudo cp -r mosdns/v2dat/ openwrt/feeds/packages/net/v2dat
