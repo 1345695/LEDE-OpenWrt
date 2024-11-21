@@ -86,6 +86,10 @@ jobs:
         sudo cp -r mosdns/v2dat/ openwrt/feeds/packages/net/v2dat
         sudo git clone -b dev --single-branch --filter=blob:none https://github.com/vernesong/OpenClash OpenClash
         sudo cp -r OpenClash/luci-app-openclash/ openwrt/feeds/luci/applications/luci-app-openclash
+        sudo rm -rf pack
+        sudo rm -rf mosdns-lua
+        sudo rm -rf mosdns-v5
+        sudo rm -rf OpenClash
         cd openwrt
         sed -i 's/KERNEL_PATCHVER:=6.6/KERNEL_PATCHVER:=6.12/g' target/linux/x86/Makefile
         sed -i 's/CONFIG_CPU_FREQ_DEFAULT_GOV_SCHEDUTIL/CONFIG_CPU_FREQ_DEFAULT_GOV_PERFORMANCE/g' target/linux/x86/64/config-5.15
